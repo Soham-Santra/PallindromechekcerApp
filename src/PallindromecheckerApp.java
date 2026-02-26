@@ -1,35 +1,42 @@
 /**
- * =============================================================================
- * MAIN CLASS - UseCase1PalindromeApp
- * =============================================================================
- * * Use Case 1: Application Entry & Welcome Message
- * * Description:
- * This class represents the entry point of the
- * Palindrome Checker Management System.
- * * @author Developer
- * @version 1.0
+ * MAIN CLASS - PalindromeCheckerApp
+ * Consolidating UC1 and UC2.
  */
 public class PallindromecheckerApp {
 
-    /**
-     * Application entry point.
-     * * This is the first method executed by the JVM
-     * when the program starts.
-     * * @param args Command-line arguments
-     */
     public static void main(String[] args) {
-        // 1. Program starts & JVM invokes main()
-        // 2. Display Application Name
-        System.out.println("========================================");
-        System.out.println("   Welcome to Palindrome   ");
-        System.out.println("========================================");
+        // UC1: Startup Flow
+        displayWelcomeMessage();
 
-        // 3. Display Application Version
-        System.out.println("Version: 1.0");
-        System.out.println("Status: Initializing startup flow...");
+        // UC2: Hardcoded Validation
+        // We define a String Literal "madam" stored in the String Constant Pool
+        String target = "madam";
+        checkHardcoded(target);
+    }
+
+    // UC1: Welcome Message
+    public static void displayWelcomeMessage() {
+        System.out.println("========================================");
+        System.out.println("   WELCOME TO PALINDROME CHECKER PRO    ");
+        System.out.println("========================================");
+        System.out.println("Version: 2.0");
         System.out.println("----------------------------------------");
+    }
 
-        // 4. Program continues or exits
-        System.out.println("System is ready. (No logic implemented yet)");
+    /**
+     * UC2: Demonstrates basic palindrome validation.
+     * Uses a hardcoded string and conditional logic.
+     */
+    public static void checkHardcoded(String original) {
+        // For UC2, we focus on the structure of the IF-ELSE statement
+        // Since we haven't implemented reversal logic yet, we simulate a check.
+        System.out.println("Checking hardcoded string: " + original);
+
+        // Conditional Statement (if-else)
+        if (original.equals("madam")) {
+            System.out.println("Result: The string is a palindrome.");
+        } else {
+            System.out.println("Result: The string is NOT a palindrome.");
+        }
     }
 }
