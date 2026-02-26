@@ -43,3 +43,32 @@ public class PalindromeCheckerApp {
         }
     }
 }
+/**
+ * UC4: Optimized comparison using a character array.
+ * Key Concepts: char[], Array Indexing, Two-Pointer Technique.
+ */
+public static void checkByTwoPointer(String original) {
+    // Convert string to char array for index-based access
+    char[] chars = original.toCharArray();
+
+    int left = 0;               // Start pointer
+    int right = chars.length - 1; // End pointer
+    boolean isPalindrome = true;
+
+    // Compare characters until pointers meet in the middle
+    while (left < right) {
+        if (chars[left] != chars[right]) {
+            isPalindrome = false;
+            break; // Exit early if a mismatch is found
+        }
+        left++;  // Move forward
+        right--; // Move backward
+    }
+
+    if (isPalindrome) {
+        System.out.println("UC4: '" + original + "' is a palindrome.");
+    } else {
+        System.out.println("UC4: '" + original + "' is NOT a palindrome.");
+    }
+}
+}
