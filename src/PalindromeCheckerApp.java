@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * MAIN CLASS - UseCase9RecursivePalindrome
+ * This class validates a palindrome using various methods including recursion.
+ */
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -10,13 +14,19 @@ public class PalindromeCheckerApp {
 
         // Calling all implemented Use Cases
         checkByReversal(target);      // UC 3
-        checkByTwoPointer(target);    // UC 4 (Restored)
-        checkByStack(target);         // UC 5 (Restored)
+        checkByTwoPointer(target);    // UC 4
+        checkByStack(target);         // UC 5
         checkByStackAndQueue(target); // UC 6
         checkByDeque(target);         // UC 7
 
         System.out.println("\n--- UC 8: Linked List (Double-Ended) Result ---");
-        checkByLinkedList(target);    // UC 8 (New)
+        checkByLinkedList(target);    // UC 8
+
+        System.out.println("\n--- UC 9: Recursive Palindrome Result ---");
+        // UC 9: Initial call passing the string, start index, and end index
+        boolean isRecursivePal = checkRecursive(target, 0, target.length() - 1);
+        System.out.println("Input: " + target);
+        System.out.println("Is Palindrome? : " + isRecursivePal);
     }
 
     // UC 1: Welcome Message
@@ -92,7 +102,7 @@ public class PalindromeCheckerApp {
         System.out.println("UC 7 (Deque): " + isPalindrome);
     }
 
-
+    // UC 8: Linked List Logic
     public static void checkByLinkedList(String original) {
         LinkedList<Character> list = new LinkedList<>();
         for (char c : original.toCharArray()) {
@@ -100,12 +110,28 @@ public class PalindromeCheckerApp {
         }
         boolean isPalindrome = true;
         while (list.size() > 1) {
-            // Symmetrically remove from head and tail
             if (!list.removeFirst().equals(list.removeLast())) {
                 isPalindrome = false;
                 break;
             }
         }
         System.out.println("UC 8 (Linked List): " + isPalindrome);
+    }
+
+    /**
+     * UC 9: Recursive Palindrome Checker
+     * Logic: Compares characters from outer positions moving inward.
+     * Demonstrates divide-and-conquer logic using method recursion.
+     */
+    private static boolean checkRecursive(String s, int start, int end) {
+        // Base Case: All characters matched or mismatch found
+        if (start >= end) {
+            return true;
+        }
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+        // Recursive call moving inward
+        return checkRecursive(s, start + 1, end - 1);
     }
 }
