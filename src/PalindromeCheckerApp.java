@@ -1,9 +1,5 @@
 import java.util.*;
 
-/**
- * MAIN CLASS - UseCase9RecursivePalindrome
- * This class validates a palindrome using various methods including recursion.
- */
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -23,10 +19,14 @@ public class PalindromeCheckerApp {
         checkByLinkedList(target);    // UC 8
 
         System.out.println("\n--- UC 9: Recursive Palindrome Result ---");
-        // UC 9: Initial call passing the string, start index, and end index
         boolean isRecursivePal = checkRecursive(target, 0, target.length() - 1);
         System.out.println("Input: " + target);
         System.out.println("Is Palindrome? : " + isRecursivePal);
+
+        // UC 10: Normalized Validation
+        System.out.println("\n--- UC 10: Normalized Palindrome Result ---");
+        String complexTarget = "A man a plan a canal Panama";
+        checkNormalizedPalindrome(complexTarget);
     }
 
     // UC 1: Welcome Message
@@ -110,6 +110,7 @@ public class PalindromeCheckerApp {
         }
         boolean isPalindrome = true;
         while (list.size() > 1) {
+            // Symmetric removal using removeFirst/removeLast
             if (!list.removeFirst().equals(list.removeLast())) {
                 isPalindrome = false;
                 break;
@@ -118,20 +119,34 @@ public class PalindromeCheckerApp {
         System.out.println("UC 8 (Linked List): " + isPalindrome);
     }
 
-    /**
-     * UC 9: Recursive Palindrome Checker
-     * Logic: Compares characters from outer positions moving inward.
-     * Demonstrates divide-and-conquer logic using method recursion.
-     */
+    // UC 9: Recursive Logic
     private static boolean checkRecursive(String s, int start, int end) {
-        // Base Case: All characters matched or mismatch found
-        if (start >= end) {
+        if (start >= end) { // Base Case 1
             return true;
         }
-        if (s.charAt(start) != s.charAt(end)) {
+        if (s.charAt(start) != s.charAt(end)) { // Base Case 2
             return false;
         }
-        // Recursive call moving inward
-        return checkRecursive(s, start + 1, end - 1);
+        return checkRecursive(s, start + 1, end - 1); // Recursive Step
+    }
+
+    /**
+     * UC 10: Normalized Palindrome Validation
+     * Logic: Removes spaces/symbols and ignores case.
+     */
+    public static void checkNormalizedPalindrome(String input) {
+        // Step 1: Normalization
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        boolean isPalindrome = true;
+        // Step 2: Validation using symmetric comparison
+        for (int i = 0; i < normalized.length() / 2; i++) {
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
