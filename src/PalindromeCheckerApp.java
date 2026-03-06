@@ -10,18 +10,19 @@ public class PalindromeCheckerApp {
 
         // Calling all implemented Use Cases
         checkByReversal(target);      // UC 3
-        checkByTwoPointer(target);    // UC 4
-        checkByStack(target);         // UC 5
+        checkByTwoPointer(target);    // UC 4 (Restored)
+        checkByStack(target);         // UC 5 (Restored)
         checkByStackAndQueue(target); // UC 6
-
-        System.out.println("\n--- UC 7: Deque (Front/Rear) Result ---");
         checkByDeque(target);         // UC 7
+
+        System.out.println("\n--- UC 8: Linked List (Double-Ended) Result ---");
+        checkByLinkedList(target);    // UC 8 (New)
     }
 
     // UC 1: Welcome Message
     public static void displayWelcomeMessage() {
         System.out.println("========================================");
-        System.out.println("   WELCOME TO PALINDROME CHECKER PRO    ");
+        System.out.println("   WELCOME TO PALINDROME CHECKER    ");
         System.out.println("========================================");
     }
 
@@ -75,18 +76,13 @@ public class PalindromeCheckerApp {
         System.out.println("UC 6 (Stack vs Queue): " + match);
     }
 
-    /**
-     * UC 7: Optimized comparison using Deque.
-     * Logic: Insert all, then remove first and last to compare.
-     */
+    // UC 7: Deque Logic
     public static void checkByDeque(String original) {
         Deque<Character> deque = new LinkedList<>();
         for (char c : original.toCharArray()) {
             deque.addLast(c);
         }
-
         boolean isPalindrome = true;
-        // Compare front and rear until the deque is empty or has 1 char left
         while (deque.size() > 1) {
             if (!deque.removeFirst().equals(deque.removeLast())) {
                 isPalindrome = false;
@@ -94,5 +90,22 @@ public class PalindromeCheckerApp {
             }
         }
         System.out.println("UC 7 (Deque): " + isPalindrome);
+    }
+
+
+    public static void checkByLinkedList(String original) {
+        LinkedList<Character> list = new LinkedList<>();
+        for (char c : original.toCharArray()) {
+            list.add(c);
+        }
+        boolean isPalindrome = true;
+        while (list.size() > 1) {
+            // Symmetrically remove from head and tail
+            if (!list.removeFirst().equals(list.removeLast())) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        System.out.println("UC 8 (Linked List): " + isPalindrome);
     }
 }
